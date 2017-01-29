@@ -1,25 +1,21 @@
 FROM java:openjdk-8u66-jre
-MAINTAINER Hortonworks
+MAINTAINER md
 
 ENV UAA_CONFIG_PATH /uaa
 ENV CATALINA_HOME /tomcat
-
+ENV DB_ENV_USER root
+ENV DB_ENV_PASSWORD GY9fm_e6+bXQ
+ENV LOGIN_CONFIG_URL=file:///tomcat/webapps/uaa/WEB-INF/classes/required_configuration.yml
 ADD run.sh /tmp/
 ADD dev.yml /uaa/uaa.yml
 RUN chmod +x /tmp/run.sh
-
-RUN wget -q https://archive.apache.org/dist/tomcat/tomcat-8/v8.0.28/bin/apache-tomcat-8.0.28.tar.gz
-RUN wget -qO- https://archive.apache.org/dist/tomcat/tomcat-8/v8.0.28/bin/apache-tomcat-8.0.28.tar.gz.md5 | md5sum -c -
-
-RUN tar zxf apache-tomcat-8.0.28.tar.gz
-RUN rm apache-tomcat-8.0.28.tar.gz
-
+ADD apache-tomcat-8.0.28.tar.gz /tmp/
 RUN mkdir /tomcat
-RUN mv apache-tomcat-8.0.28/* /tomcat
+RUN mv /tmp/apache-tomcat-8.0.28/* /tomcat
 RUN rm -rf /tomcat/webapps/*
 
-ADD https://github.com/sequenceiq/uaa/releases/download/3.9.3/cloudfoundry-identity-uaa-3.9.3.war /tomcat/webapps/
-RUN mv /tomcat/webapps/cloudfoundry-identity-uaa-3.9.3.war /tomcat/webapps/ROOT.war
+ADD cloudfoundry-identity-uaa-3.10.0-SNAPSHOT.war /tomcat/webapps/
+RUN mv /tomcat/webapps/cloudfoundry-identity-uaa-3.10.0-SNAPSHOT.war /tomcat/webapps/uaa.war
 
 #VOLUME ["/uaa"]
 

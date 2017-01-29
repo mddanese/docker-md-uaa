@@ -1,10 +1,12 @@
-spring_profiles: postgresql
+spring_profiles: mysql
 
 database:
-  driverClassName: org.postgresql.Driver
-  url: jdbc:postgresql://${DB_PORT_5432_TCP_ADDR}:${DB_PORT_5432_TCP_PORT}/${DB_ENV_DB:postgres}
-  username: ${DB_ENV_USER:postgres}
-  password: ${DB_ENV_PASS:}
+  driverClassName: org.mariadb.jdbc.Driver
+  url: jdbc:mysql://hidden
+  #url: jdbc:postgresql://${DB_PORT_5432_TCP_ADDR}:${DB_PORT_5432_TCP_PORT}/${DB_ENV_DB:postgres}
+  username: ${DB_ENV_USER}
+  password: ${DB_ENV_PASSWORD:}
+  #schemas: ['uaa']
 
 oauth:
   client:
