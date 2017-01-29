@@ -3,8 +3,8 @@ MAINTAINER md
 
 ENV UAA_CONFIG_PATH /uaa
 ENV CATALINA_HOME /tomcat
-ENV DB_ENV_USER root
-ENV DB_ENV_PASSWORD GY9fm_e6+bXQ
+ENV DB_ENV_USER hidden
+ENV DB_ENV_PASSWORD hidden
 ENV LOGIN_CONFIG_URL=file:///tomcat/webapps/uaa/WEB-INF/classes/required_configuration.yml
 ADD run.sh /tmp/
 ADD dev.yml /uaa/uaa.yml
